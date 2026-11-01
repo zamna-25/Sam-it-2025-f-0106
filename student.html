@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Student Marks Form</title>
+</head>
+<body>
+
+<form action="results.html" method="get" onsubmit="return check()">
+<fieldset style="width:400px">
+
+  <p>
+    Name
+    <input type="text" name="name" id="name">
+  </p>
+
+  <p>
+    Gender
+    <input type="radio" name="g" value="M"> M
+    <input type="radio" name="g" value="F"> F
+  </p>
+
+  <p>
+    Course<br>
+    <input type="checkbox" name="c" value="HNDIT"> HNDIT<br>
+    <input type="checkbox" name="c" value="HNDA"> HNDA<br>
+    <input type="checkbox" name="c" value="HNDE"> HNDE
+  </p>
+
+  <table>
+    <tr>
+      <th>Subject</th>
+      <th>Marks</th>
+      <th>Grade</th>
+    </tr>
+    <tr>
+      <td>ML</td>
+      <td><input type="number" name="ml" class="m" size="5"></td>
+      <td><input type="text" name="gml" class="g" size="2" readonly></td>
+    </tr>
+    <tr>
+      <td>CN</td>
+      <td><input type="number" name="cn" class="m" size="5"></td>
+      <td><input type="text" name="gcn" class="g" size="2" readonly></td>
+    </tr>
+    <tr>
+      <td>EA</td>
+      <td><input type="number" name="ea" class="m" size="5"></td>
+      <td><input type="text" name="gea" class="g" size="2" readonly></td>
+    </tr>
+  </table>
+
+  <p>
+    Average
+    <input type="text" name="avg" id="avg" readonly>
+  </p>
+
+  <button type="submit">Submit</button>
+  <button type="button" onclick="calc()">Click</button>
+
+</fieldset>
+</form>
+
+<script>
+
+function grade(m){
+  if (m > 80) return "A";
+  if (m >= 60) return "B";
+  if (m >= 40) return "C";
+  return "D";
+}
+
+
+function calc(){
+  var marks = document.querySelectorAll(".m");
+  var grades = document.querySelectorAll(".g");
+  var sum = 0;
+
+  for (var i = 0; i < marks.length; i++){
+    var v = parseFloat(marks[i].value) || 0;
+    sum = sum + v;
+    grades[i].value = grade(v);
+  }
+
+  document.getElementById("avg").value = (sum / marks.length).toFixed(2);
+}
+
+
+function check(){
+  var name = document.getElementById("name").value;
+  var gender = document.querySelector('input[name="g"]:checked');
+  var course = document.querySelector('input[name="c"]:checked');
+
+  if (name == "" || gender == null || course == null){
+    alert("Please fill Name, Gender and Course.");
+    return false;  
+  }
+
+  calc();          
+  return true;    
+}
+</script>
+
+</body>
+</html>

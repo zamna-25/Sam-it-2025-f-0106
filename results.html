@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Result</title>
+</head>
+<body>
+
+<h2>Result</h2>
+
+<p>Name: <span id="name"></span></p>
+<p>Gender: <span id="gender"></span></p>
+<p>Course: <span id="course"></span></p>
+
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Subject</th>
+    <th>Marks</th>
+    <th>Grade</th>
+  </tr>
+  <tr>
+    <td>ML</td>
+    <td id="ml"></td>
+    <td id="gml"></td>
+  </tr>
+  <tr>
+    <td>CN</td>
+    <td id="cn"></td>
+    <td id="gcn"></td>
+  </tr>
+  <tr>
+    <td>EA</td>
+    <td id="ea"></td>
+    <td id="gea"></td>
+  </tr>
+</table>
+
+<p>Average: <span id="avg"></span></p>
+
+<a href="student.html">Back</a>
+
+<script>
+var p = new URLSearchParams(location.search);
+
+function show(id, value){
+  document.getElementById(id).textContent = value;
+}
+
+show("name", p.get("name"));
+show("gender", p.get("g"));
+show("course", p.getAll("c").join(", "));
+show("ml", p.get("ml"));
+show("cn", p.get("cn"));
+show("ea", p.get("ea"));
+show("gml", p.get("gml"));
+show("gcn", p.get("gcn"));
+show("gea", p.get("gea"));
+show("avg", p.get("avg"));
+</script>
+
+</body>
+</html>
